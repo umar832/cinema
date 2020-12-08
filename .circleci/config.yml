@@ -95,15 +95,15 @@ deploy-to-aws-cloudfront:
     - run:
         name: Deploy to AWS Cloudfront
         command: |
-        aws configure set preview.cloudfront
-        if [ "${CURRENT_BRANCH}" == "main" ]
-        then
-          aws cloudfront create-invalidation --disturbation-id ${PROD_DISTRIBUTION_ID} --paths /\*
-        elif [ "${CURRENT_BRANCH}" == "stage"]
-          aws cloudfront create-invalidation --disturbation-id ${STAGE_DISTRIBUTION_ID} --paths /\* 
-        else
+          aws configure set preview.cloudfront
+          if [ "${CURRENT_BRANCH}" == "main" ]
+          then
+            aws cloudfront create-invalidation --disturbation-id ${PROD_DISTRIBUTION_ID} --paths /\*
+          elif [ "${CURRENT_BRANCH}" == "stage"]
+            aws cloudfront create-invalidation --disturbation-id ${STAGE_DISTRIBUTION_ID} --paths /\* 
+          else
             aws cloudfront create-invalidation --disturbation-id ${DEV_DISTRIBUTION_ID} --paths /\* 
-        fi
+          fi
 
 
 workflows:
