@@ -54,7 +54,7 @@ deploy-to-aws-s3:
           echo "Build successfull"
 
     - run:
-        name: Deploy to AWS S3
+        name: deploy to aws s3
         command: |
           if [ "${CURRENT_BRANCH}" == "main" ] 
           then
