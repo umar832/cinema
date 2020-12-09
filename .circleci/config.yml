@@ -13,13 +13,10 @@ jobs:
       - restore_cache:
            keys:
              - app-{{ checksum "package.json" }}
-             - app
-      - run:
-          name: Install yarn
-          command: npm install -g npm@7.1.1
+             - app-
       - run:
           name: Intsall dependecies
-          command:  npm Install
+          command: npm Install
          
       - save_cache:
           paths:
