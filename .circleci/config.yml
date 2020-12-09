@@ -25,7 +25,7 @@ jobs:
           paths:
             - node_modules
           key:
-             - app-{{ checksum "package.json" }}
+            - app-{{ checksum "package.json" }}
 
 deploy-to-aws-s3:
   docker:
