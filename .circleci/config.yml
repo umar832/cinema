@@ -16,10 +16,12 @@ jobs:
              - app
       - run:
           name: Install yarn
-          command: npm install -g yarn 
+          command: 
+            sudo npm install -g yarn 
       - run:
           name: Intsall dependecies
-          command: npm Install
+          command: 
+            sudo npm Install
          
       - save_cache:
           paths:
