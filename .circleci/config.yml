@@ -100,7 +100,7 @@ deploy-to-aws-cloudfront:
           fi
 
 
-workflow:
+workflows:
   build_and_deploy:
     jobs:
       - build
