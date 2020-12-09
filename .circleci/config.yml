@@ -52,18 +52,17 @@ deploy-to-aws-s3:
           cd build 
           zip ../build.zip -r * .[^.]*
           echo "Build successfull"
-
     - run:
         name: deploy to aws s3
         command: |
-       if [ "${CURRENT_BRANCH}" == "main" ] 
-       then
-         aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_PROD_BUCKET} --delete
-       elif [ "${CURRENT_BRANCH}" == "stage"]
-         aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_STAGE_BUCKET} --delete
-       else
-         aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_DEV_BUCKET} --delete 
-       fi
+        if [ "${CURRENT_BRANCH}" == "main" ] 
+        then
+          aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_PROD_BUCKET} --delete
+        elif [ "${CURRENT_BRANCH}" == "stage"]
+          aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_STAGE_BUCKET} --delete
+        else
+          aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_DEV_BUCKET} --delete 
+        fi
 
 
 deploy-to-aws-cloudfront:
@@ -91,19 +90,18 @@ deploy-to-aws-cloudfront:
           cd build 
           zip ../build.zip -r * .[^.]*
           echo "Build successfull"
-
     - run:
         name: Deploy to AWS Cloudfront
         command: |
-          aws configure set preview.cloudfront
-        if [ "${CURRENT_BRANCH}" == "main" ]
-        then
-          aws cloudfront create-invalidation --disturbation-id ${PROD_DISTRIBUTION_ID} --paths /\*
-        elif [ "${CURRENT_BRANCH}" == "stage"]
-          aws cloudfront create-invalidation --disturbation-id ${STAGE_DISTRIBUTION_ID} --paths /\* 
-        else
-          aws cloudfront create-invalidation --disturbation-id ${DEV_DISTRIBUTION_ID} --paths /\* 
-        fi
+         aws configure set preview.cloudfront
+         if [ "${CURRENT_BRANCH}" == "main" ]
+         then
+           aws cloudfront create-invalidation --disturbation-id ${PROD_DISTRIBUTION_ID} --paths /\*
+         elif [ "${CURRENT_BRANCH}" == "stage"]
+           aws cloudfront create-invalidation --disturbation-id ${STAGE_DISTRIBUTION_ID} --paths /\* 
+         else
+           aws cloudfront create-invalidation --disturbation-id ${DEV_DISTRIBUTION_ID} --paths /\* 
+         fi
 
 
 workflows:
