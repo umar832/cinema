@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - run:
-           name: Show circle branch
+           name: Show current branch
            command: echo ${CIRCLE_BRANCH}
       - restore_cache:
            keys:
@@ -30,7 +30,7 @@ deploy-to-aws-s3:
   steps:
     - checkout
     - run:
-        name: Show circle branch
+        name: Show current branch
         command: echo ${CIRCLE_BRANCH}
     - run:
         name: Installing AWS CLI
@@ -68,7 +68,7 @@ deploy-to-aws-cloudfront:
   steps:
     - checkout
     - run:
-        name: Show circle branch
+        name: Show current branch
         command: echo ${CIRCLE_BRANCH}
     - run:
         name: Installing AWS CLI
