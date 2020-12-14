@@ -68,11 +68,11 @@ deploy-to-aws-s3:
         command: |
           if [ "${CIRCLE_BRANCH}" == "main" ] 
           then
-            aws --region ${AWS_REGION} s3 sync ~/project/build/deploy s3://${AWS_PROD_BUCKET} --delete
+            aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_PROD_BUCKET} --delete
           elif [ "${CIRCLE_BRANCH}" == "stage"]
-            aws --region ${AWS_REGION} s3 sync ~/project/build/deploy s3://${AWS_STAGE_BUCKET} --delete
+            aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_STAGE_BUCKET} --delete
           else
-            aws --region ${AWS_REGION} s3 sync ~/project/build/deploy s3://${AWS_DEV_BUCKET} --delete 
+            aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_DEV_BUCKET} --delete 
           fi
 
 
@@ -102,6 +102,7 @@ workflow:
   build_and_deploy:
     jobs:
       - build
+      - deploy
       - deploy-to-aws-s3:
           reques:
             - build
