@@ -99,11 +99,11 @@ deploy-to-aws-cloudfront:
 
 
 workflow:
+  version: 2
   build_and_deploy:
     jobs:
       - build
-      - deploy
-      - deploy-to-aws-s3:
+      - deploy:
           reques:
             - build
           filters:
