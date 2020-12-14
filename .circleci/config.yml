@@ -105,6 +105,7 @@ workflow:
       - deploy-to-aws-s3:
           reques:
             - build
+            - deploy
           filters:
             branches:
               only:
@@ -113,7 +114,6 @@ workflow:
                 - main
       - deploy-to-aws-cloudfront:
           reques:
-            - build
             - deploy-to-aws-s3
           filters:
             branches:
